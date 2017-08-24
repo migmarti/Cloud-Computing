@@ -4,4 +4,4 @@ Properties:
   BucketName: fidelfcastro/mmartbucket
   WebsiteConfiguration:
     ErrorDocument: 404.html
-		IndexDocument: index.html
+    IndexDocument: index.html
