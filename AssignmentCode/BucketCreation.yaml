@@ -1,7 +1,7 @@
 Type: "AWS::S3::Bucket"
 Properties: 
-	  AccessControl: PublicRead 
-  	BucketName: fidelfcastro/mmartbucket
-  	WebsiteConfiguration:
-		  ErrorDocument: 404.html
-		  IndexDocument: index.html
+  AccessControl: PublicRead 
+  BucketName: fidelfcastro/mmartbucket
+  WebsiteConfiguration:
+    ErrorDocument: 404.html
+		IndexDocument: index.html
