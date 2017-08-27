@@ -64,9 +64,27 @@ console.log("Server running at http://127.0.0.1:8000/");
 
 <p>2- Instalar el sdk con el siguiente comando:</p>
 
-<pre><xmp>npm install aws-sdk</xmp></pre>
+<pre><xmp>sudo npm install aws-sdk</xmp></pre>
 
 <p><b>4. Create a code in NodeJs that will tell you the version/date of your website in S3. 15 Points.</b></p>
+
+<pre><xmp>
+var AWS = require('aws-sdk');
+var s3 = new AWS.S3();
+
+var params = {
+	Bucket:'mmartbucket',
+	Key: 'index.html'}
+
+s3.getObject(params, function(err, data) {
+	if (err) console.log(err, err.stack);
+	else console.log('The last modified date of '+ params.Key + ' in ' + params.Bucket + ' is: ' + data.LastModified);
+});
+</xmp></pre>
+
+<div style="text-align:center">
+    <p><a href="https://github.com/migmarti/Cloud-Computing/blob/master/AssignmentCode/GetWebsiteDate.js" target="_blank">Get Date from Bucket Object</a></p>
+</div>
 
 <p><b>5. Read and explain the <a href="http://martinfowler.com/articles/microservice-trade-offs.html" target="_blank">post</a> about Microservices Trade-Offs by Martin Fowler. 15 points.</b></p>
 
