@@ -2,10 +2,150 @@
     <h1>Assignment #2</h1>
 </div>
 
-<b>1. Explain what CloudFormation is and write a yaml file to create a bucket using CloudFormation. 15 points.</b>
-<br>
-CloudFormation es un servicio ofrecido por AWS dirigido hacia desarrolladores y administradores. Su función es ofrecer un método sencillo para crear una colección de recursos de AWS relacionados entre sí para gestionarlos de una manera ordenada y predecible.
-<br>
+<p><b>1. Explain what CloudFormation is and write a yaml file to create a bucket using CloudFormation. 15 points.</b></p>
+
+<p>CloudFormation es un servicio ofrecido por AWS dirigido hacia desarrolladores y administradores. Su función es ofrecer un método sencillo para crear una colección de recursos de AWS relacionados entre sí para gestionarlos de una manera ordenada y predecible.</p>
+
+<pre><xmp>
+    Type: "AWS::S3::Bucket"
+    Properties:
+        AccessControl: PublicRead
+        BucketName: mmartbucket
+        WebsiteConfiguration:
+            ErrorDocument: 404.html
+            IndexDocument: index.html
+</xmp></pre>
+
+<div style="text-align:center">
+    <p><a href="https://github.com/migmarti/Cloud-Computing/blob/master/AssignmentCode/BucketCreation.yaml" target="_blank">YAML Bucket Creation</a></p>
+</div>
+
+<p><b>2. Create a Hello World in NodeJs and create a tutorial about it. 15 points.</b></p>
+
+<p>Node.js es un tiempo de ejecución (runtime) de JavaScript construido con el motor JavaScript de V8 de Chrome. Node.js utiliza un modelo de entrada y salida sin bloqueo, controlado por eventos, que lo hace ligero y eficiente. El siguiente tutorial explica cómo imprimir un mensaje de texto por medio de Node.js y HTTP en Ubuntu.</p>
+
+<p>1- Instalar una versión actualizada de Node por medio de la terminal con los siguientes comandos. Deberás ingresar tus credenciales de Ubuntu al ejecutar un comando sudo.</p>
+
+<pre><xmp>sudo apt-get update
+sudo apt-get install nodejs</xmp></pre>
+
+<p>2- Crear un archivo de texto con el siguiente código y salvarlo con extensión js.</p>
+
+<pre><xmp>
+var http = require('http');
+
+var server = http.createServer(function (request, response) {
+  response.writeHead(200, {"Content-Type": "text/plain"});
+  response.end("Hello World\n");
+});
+
+server.listen(8000);
+
+console.log("Server running at http://127.0.0.1:8000/");
+</xmp></pre>
+
+<div style="text-align:center">
+    <p><a href="https://github.com/migmarti/Cloud-Computing/blob/master/AssignmentCode/HelloWorldHttp.js" target="_blank">Node.js HTTP Hello World</a></p>
+</div>
+
+<p>3- Para ejecutar el código, ingresar la siguiente línea en la terminal en el directorio del archivo.</p>
+
+<pre><xmp>node HelloWorldHttp.js</xmp></pre>
+
+<p>4- Para ver el mensaje, ingresa la dirección del servidor en un navegador.</p>
+
+<p><b>3. Install the aws sdk for nodejs and create a tutorial about it. 15 points.</b></p>
+
+<p>El SDK de AWS permite eliminar la complejidad de la codificación, ya que proporciona objetos JavaScript para los servicios de AWS. Para instalarlo, se requiere Node.js y npm; una herramienta que facilita que los desarrolladores de JavaScript compartan, actualicen y reutilicen código compartido. El siguiente tutorial es para usuarios de Ubuntu.</p>
+
+<p>1- Después instalar nodejs, ingresar el siguiente comando:</p>
+
+<pre><xmp>sudo apt-get install npm</xmp></pre>
+
+<p>2- Instalar el sdk con el siguiente comando:</p>
+
+<pre><xmp>npm install aws-sdk</xmp></pre>
+
+<p><b>4. Create a code in NodeJs that will tell you the version/date of your website in S3. 15 Points.</b></p>
+
+<p><b>5. Read and explain the <a href="http://martinfowler.com/articles/microservice-trade-offs.html" target="_blank">post</a> about Microservices Trade-Offs by Martin Fowler. 15 points.</b></p>
+
+<p>Martin Fowler explica que muchos equipos de desarrollo han encontrado que el estilo arquitectónico de los microservicios es un acercamiento superior a la de una arquitectura monolítica. Sin embargo, otros equipos han descubierto que son una carga que impide la productividad. Como todo estilo arquitectónico, los microservicios traen costos y beneficios; sus ‘trade-offs’. Para hacer una elección confiable es necesario entenderlos y aplicarlos a su contexto específico.</p>
+
+</p>Entre los beneficios de los microservicios destacan los siguientes. Uno de ellos es el refuerzo de la estructura modular, lo cual es particularmente importante para los equipos de desarrolladores más grandes. Además, estos servicios son más fáciles de implementar y tienen menos probabilidades de causar fallas en el sistema cuando fallan individualmente. Finalmente, con microservicios es posible combinar múltiples lenguajes, marcos de desarrollo y tecnologías de almacenamiento de datos, lo que incrementa la diversidad y flexibilidad del proyecto.</p>
+
+<p>Las desventajas que surgen a partir de los microservicios incluyen la dificultad al programar sistemas distribuidos, ya que las llamadas remotas son lentas y siempre están en riesgo de fallo. También, el mantenimiento de una consistencia fuerte es muy difícil para un sistema distribuido, lo que significa que todos tienen que gestionar la consistencia final. Por último, se necesita un equipo experimentado de operaciones para manejar múltiples servicios que se están asignando regularmente, lo cual implica una carga pesada de trabajo.</p>
+
+<p><b>6. Create a comparison table between AWS, Azure and Google Cloud. 15 points.</b></p>
+
+<style>
+    table, th, td {
+        border: 1px solid black;
+    }
+</style>
+<table>
+    <thead>
+    <tr>
+        <td></td>
+        <th>Azure</th>
+        <th>AWS</th>
+        <th>Google Cloud</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th>Regiones Disponibles</th>
+        <td>Azure Regions</td>
+        <td>AWS Global Infrastructure</td>
+        <td>Google Compute Regions and Zones</td>
+    </tr>
+    <tr>
+        <th>Servicios de Cómputo</th>
+        <td>Virtual Machines (VMs)</td>
+        <td>Elastic Compute Cloud (EC2)</td>
+        <td>Compute Engine</td>
+    </tr>
+    <tr>
+        <th>Cómputo Serverless</th>
+        <td>Azure Functions</td>
+        <td>AWS Lambda</td>
+        <td>Google Cloud Functions</td>
+    </tr>
+    <tr>
+        <th>Almacenamiento de Objetos</th>
+        <td>Azure Storage</td>
+        <td>Amazon Simple Storage (S3)</td>
+        <td>Cloud Storage</td>
+    </tr>
+    <tr>
+        <th>Opciones de Bases de Datos</th>
+        <td>Azure SQL Database</td>
+        <td>Amazon RDS & Amazon Redshift</td>
+        <td>Cloud SQL & Cloud Spanner</td>
+    </tr>
+    <tr>
+        <th>Administración y Seguridad</th>
+        <td>Azure Active Directory</td>
+        <td>AWS Directory Service & AWS IAM</td>
+        <td>Cloud IAM</td>
+    </tr>
+    <tbody>
+</table>
+
+<p><b>7. Read at least 5 sections of Seth Godin’s Manifesto: “Stop Stealing Dreams” and tell me what you think about it. 10 points.</b></p>
+
+<p>Yo opino que la escuela no es el único factor responsable de “robar sueños”; también afecta las experiencias y condiciones de vida que han afectado cada quien. Ciertas familias, instituciones y gobiernos alrededor del mundo otorgan un mayor énfasis a la fomentación de la educación. Por ello, la calidad de la educación y el cultivo de sueños puede variar inmensamente.</p>
+
+<p>Al recibir una educación de baja calidad, es entendible reconocer el robo de un sueño. Entre las grandes causas de este
+    fenómeno se encuentra en el hecho de inculcar u obligar temas que no son de interés para los estudiantes, u otorgándoles de una manera desorganizada y sin pasión. Creo que la pasión, junto con la voluntad, son las fuerzas más importantes en las áreas personal, académica y profesional de la vida moderna, pero la educación mal manejada la suprime.</p>
+
+<p>Mi punto es que todo puede estar tratando de robar nuestros sueños y solo nosotros podemos defendernos mediante la pasión y la mera fuerza de voluntad. Opino que no deberíamos culpar las escuelas, gobiernos y demás, sino a nosotros mismos por no poder quebrar los obstáculos que se presentan. Sin embargo, según la calidad de vida de cada quien, este acto de quebrar barreras llega a ser difícil, pero nunca es imposible.</p>
+
+
+
+
+
+
 
 <div style="text-align:center">
     <a ng-href="/#!/assignments"><button>Back</button></a>
