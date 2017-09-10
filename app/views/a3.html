@@ -1,0 +1,133 @@
+<div class="jumbotron">
+    <h1>Assignment #3</h1>
+</div>
+
+<p><b>1. Create a NodeJS script that will do the following:<br>
+&emsp;• Download the image from s3://cc414-images/scientist.png.<br>
+&emsp;• Check if the metadata key “x-amz-meta-move” of the image is true.<br>
+&emsp;• If true, upload the image to s3://cc414-images/{MATRICULA}/image.png <br>
+&emsp;• 20 points.</b></p>
+
+<pre><xmp>
+const aws = require('aws-sdk');
+const s3 = new aws.S3();
+
+var getParams = {
+        Bucket: 'cc414-images',
+        Key: 'scientist.png'
+}
+
+s3.getObject(getParams, function(err, data) {
+    if (err){
+        console.log(err);
+        return err;
+    }
+    else if (data.Metadata) {
+  	var putParams = {
+            Bucket: 'cc414-images',
+            Key: '20159/image.png',
+            Body: data.Body
+        }
+        s3.putObject(putParams, function(err, res) {
+            if(err){
+                console.log(err);
+                return err;
+            }
+            else {
+                console.log("Successfully uploaded image to " + putParams.Key +
+			    " in bucket " + putParams.Bucket);
+            }
+        });
+    }
+});
+</xmp></pre>
+
+<div style="text-align:center">
+    <p><a href="https://github.com/migmarti/Cloud-Computing/blob/master/AssignmentCode/GetPutImage.js" target="_blank">Get and Put S3 Image</a></p>
+</div>
+
+<p><b>1. Create a NodeJS script that will do the following:<br>
+    &emsp;• Will get the Nasa Astronomy Picture of the day.<br>
+    &emsp;• Save the image in the local file system.<br>
+    &emsp;• Print the title of the image.<br>
+    &emsp;• 20 points.</b></p>
+
+<pre><xmp>
+var http = require('https');
+var request = require('request');
+var apiKey = "L9JyFoaQrUvDKSdGmMrMmyqicsOBNhVx5IaAGRED";
+var url = 'https://api.nasa.gov/planetary/apod?api_key='+apiKey;
+var fileStream = require('fs');
+
+http.get(url, (res) => {
+    res.setEncoding('utf8');
+    res.on("data", (data) => {
+        var info = JSON.parse(data);
+        console.log("\nTitle: "+ info.title +
+                    "\n\nExplanation: "+ info.explanation +
+                    "\n\nCopyright: "+ info.copyright +
+                    "\n\nDate: "+ info.date);
+        console.log("\nDownloading image from: " + info.url);
+        var request = http.get(info.url, function(response) {
+            var file = fileStream.createWriteStream(info.title + ".jpg");
+            response.pipe(file);
+            console.log("Download complete. Saved on local directory.");
+        });
+    });
+});
+</xmp></pre>
+
+<div style="text-align:center">
+    <p><a href="https://github.com/migmarti/Cloud-Computing/blob/master/AssignmentCode/NasaPictureOfTheDay.js" target="_blank">NASA Picture of the Day</a></p>
+</div>
+
+<p><b>3. Implement Google Analytics in your personal web site (All teams will do the same
+for their Final Project). 20 points.</b></p>
+
+<p>El siguiente código se ubica en el index.html de esta aplicación.</p>
+
+<pre><xmp>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-106127999-1', 'auto');
+  ga('send', 'pageview');
+    </script>
+</xmp></pre>
+
+<p><b>4. Read and explain the following article by Martin Fowler: <a href="http://martinfowler.com/articles/richardsonMaturityModel.html" target="_blank">Link.</a> 20 points.</b></p>
+
+<p>Este artículo habla sobre un modelo desarrollado por el autor de RESTful Web API, Leonard Richardson, que descompone los principales elementos de un enfoque REST en tres pasos. Estos son recursos, verbos HTTP y controles de hipermedia. Para establecer los puntos estructurales del modelo, se han definido cuatro niveles, empezando desde 0.</p>
+
+<p>El nivel 0 indica el punto de partida para el modelo. Se empieza utilizando HTTP como un sistema de transporte para interacciones remotas, pero sin usar ninguno de los mecanismos de la web. Es decir, se implementa HTTP como un mecanismo de tunelización para una interacción remota.</p>
+
+<p>Martin Fowler ejemplifica este proceso con realizar una cita con su médico. En un escenario de nivel 0, el hospital expondrá un punto final de servicio en algún URI. El software de citas primero necesita saber qué ranuras abiertas tiene su médico en una fecha determinada, por lo que hace una solicitud del sistema de citas del hospital para obtener esa información. A continuación, postea a ese punto final un documento que contiene los detalles de su solicitud. En fin, menciona que es simplemente lanzar documentos XML de ida y vuelta.</p>
+
+<p>En el nivel 1 se introducen los recursos. Esencialmente, en lugar de hacer todas las peticiones a un punto final de servicio singular, ahora se empieza a hablar con recursos individuales. Fowler explica que la diferencia ahora es que si alguien necesita hacer algo acerca de la cita, como reservar algunas pruebas, primero se apoderan del recurso de cita, que podría tener un URI como http://royalhope.nhs.uk/slots/1234/appointment, y publicar en ese recurso.</p>
+
+<p>El nivel 2 abarca los verbos de HTTP. Fowler utilizó HTTP POST verbos para todas sus interacciones en el nivel 0 y 1, y explica que algunas personas utilizan GETs en su lugar o además. Menciona que en estos niveles no hace mucha diferencia, ambos son utilizados como mecanismos de tunelización. El nivel 2 se aleja de esto, utilizando los verbos HTTP lo más cerca posible de cómo se utilizan en el propio HTTP. Para la lista de ranuras, se realizo una operación GET.</p>
+
+<p>Se remarca que en el nivel 2 el uso de GET para una solicitud es crucial debido a que permite que cualquier participante en el enrutamiento de las solicitudes usar almacenamiento en caché, lo que es un elemento clave en el rendimiento de la web.</p>
+
+<p>El último nivel trata de HATEOAS (Hipertexto como el motor del estado de aplicación). El punto de los controles de hipermedia es que nos dicen lo que podemos hacer a continuación, y la URI del recurso que necesitamos manipular para hacerlo. En lugar de tener que saber dónde se publica la solicitud de cita, los controles hipermedia dicen cómo hacerlo. Una ventaja de los controles hipermedia es que permite al servidor cambiar su esquema URI sin romper clientes.</p>
+
+<p>Al finalizar el articulo, Fowler menciona los significados de los niveles 1-3. El Nivel 1 aborda la cuestión de manejar la complejidad mediante el uso de dividir y conquistar, rompiendo un extremo de servicio de gran tamaño hacia abajo en múltiples recursos. Nivel 2 introduce un conjunto estándar de verbos para que se puedan manejar situaciones de la misma manera, eliminando variaciones innecesarias. El nivel 3 introduce la posibilidad de descubrimiento, proporcionando una forma de hacer un protocolo más auto-documentado.</p>
+
+<p><b>5. Explain why cloud computing is important. 10 points.</b></p>
+
+<p>La computación en nube permite a las personas utilizar diversos tipos de aplicaciones de software a través del Internet de una manera más conveniente y efectiva. El enfoque hacia esta computacion puede traer numerosos beneficios, tales como la flexibilidad, accesibilidad remota, recuperación de desastres, seguridad, automatización y hasta amigabilidad hacia el medio ambiente.</p>
+
+<p>No solo tiene su importancia en las ciencias computacionales, es indispensable en casi todos los campos profesionales y académicos. Sus funciones incluyen el aprovisionamiento, la ampliación y el mantenimiento de aplicaciones y servidores. Puede proporcionar bases de datos y servidores rápidamente, y tener aplicaciones en funcionamiento en cualquier momento. En adición, puede utilizarse para supervisar las distintas partes de un sistema y realizar un seguimiento del tiempo de actividad, el tiempo de respuesta y mandar alertas importantes.</p>
+
+<p><b>6. Explain what would like to change in this class and why. 10 points.</b></p>
+
+<p>Me gusta el enfoque práctico y ágil que trae la clase aunque en ocasiones me pierdo debido al ritmo de paso acelerado. Eso es una debilidad personal y reconozco que debo acostumbrarme a la estructura de la clase. No cambiaría la manera en la que se da la materia.</p>
+
+
+
+<div style="text-align:center">
+    <a ng-href="/#!/assignments"><button>Back</button></a>
+</div>
