@@ -37,6 +37,9 @@ angular
       .when('/a2', {
         templateUrl: 'views/a2.html'
       })
+      .when('/a3', {
+        templateUrl: 'views/a3.html'
+      })
       .when('/chart', {
         templateUrl: 'views/chart.html',
         controller: 'ChartCtrl',
