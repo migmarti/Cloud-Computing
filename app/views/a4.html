@@ -2,15 +2,15 @@
     <h1>Assignment #4</h1>
 </div>
 
-<p><a href="https://github.com/migmarti" target="_blank">Github Link</a></p>
+<p><a href="https://github.com/migmarti/Cloud-Computing/blob/master/app/scripts/controllers/a4.js" target="_blank">Github Link</a></p>
 
 <div>
     Character 1:
-    <select ng-model="selectedName" ng-options="x for x in names">
+    <select ng-model="selectedName" ng-options="x for x in names | orderBy">
     </select>
     <br>
     Character 2:
-    <select ng-model="selectedName2" ng-options="x for x in names">
+    <select ng-model="selectedName2" ng-options="x for x in names| orderBy">
     </select>
     <br>
     <div style="text-align:center;">

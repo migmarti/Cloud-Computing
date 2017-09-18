@@ -48,7 +48,6 @@ angular.module('migsApp')
          if (exit) { break; }
          offset += 100;
     }
-    characterNames = characterNames.sort();
     $scope.names = characterNames;
     //$scope.names = ['mike', 'shorpo', 'puskintio'];
     $scope.execute = function () {
