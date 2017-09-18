@@ -1,0 +1,39 @@
+<div class="jumbotron">
+    <h1>Assignment #4</h1>
+</div>
+
+<p><a href="https://github.com/migmarti" target="_blank">Github Link</a></p>
+
+<div>
+    Character 1:
+    <select ng-model="selectedName" ng-options="x for x in names">
+    </select>
+    <br>
+    Character 2:
+    <select ng-model="selectedName2" ng-options="x for x in names">
+    </select>
+    <br>
+    <div style="text-align:center;">
+        <button ng-click="execute()">Execute</button>
+    </div>
+</div>
+
+<br>
+<div style="visibility:hidden;" id="theDiv">
+    <div style="text-align:center;">
+        <p><b>{{selectedName}} and {{selectedName2}}</b></p>
+    </div>
+    <div>
+        <p><b>Common Comics</b></p>
+        <div ng-repeat="comic in comics track by $index">{{comic}}</div>
+    </div>
+    <br>
+    <div>
+        <p><b>Common Series</b></p>
+        <div ng-repeat="s in series track by $index">{{s}}</div>
+    </div>
+</div>
+
+<div style="text-align:center">
+    <a ng-href="/#!/assignments"><button>Back</button></a>
+</div>

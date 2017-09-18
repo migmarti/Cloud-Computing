@@ -30,6 +30,8 @@ module.exports = function(config) {
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-touch/angular-touch.js',
       'bower_components/plotlyjs/plotly.js',
+      'bower_components/js-md5/src/md5.js',
+      'bower_components/angular-md5/angular-md5.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
