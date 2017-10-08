@@ -14,11 +14,10 @@ angular.module('migsApp')
       'AngularJS',
       'Karma'
     ];
+    $scope.names = [];
     var limit = 100;
     var offset = 0;
-    var characterNames = [];
-    var characterComics = new Map();
-    var characterSeries = new Map();
+    var characters = new Map();
     var timeStamp = new Date();
     var privateKey = '6c454472cc985829b464b06c7dc908fc9f5ed8ec';
     var publicKey = '22f8edbc735e0e4d217bd6ad0d808bc7';
@@ -31,14 +30,8 @@ angular.module('migsApp')
                  var info = response.data;
                  var results = info.data.results;
                  for (var i = 0; i < results.length; i++) {
-                     var character = {
-                         name: results[i].name,
-                         comics: results[i].comics,
-                         series: results[i].series
-                     };
-                     characterNames.push(character.name);
-                     characterComics.set(character.name, character.comics);
-                     characterSeries.set(character.name, character.series);
+                     $scope.names.push(results[i].name);
+                     characters.set(results[i].name, results[i].id);
                  }
              })
              .catch(function (data) {
@@ -48,32 +41,83 @@ angular.module('migsApp')
          if (exit) { break; }
          offset += 100;
     }
-    $scope.names = characterNames;
     //$scope.names = ['mike', 'shorpo', 'puskintio'];
     $scope.execute = function () {
         $scope.comics = [];
         $scope.series = [];
         if ($scope.selectedName != null && $scope.selectedName2 != null) {
-            var n1 = $scope.selectedName;
-            var n2 = $scope.selectedName2;
-            $scope.comics = getCommon(characterComics.get(n1), characterComics.get(n2));
-            $scope.series = getCommon(characterSeries.get(n1), characterSeries.get(n2));
+            var id1 = characters.get($scope.selectedName);
+            var id2 = characters.get($scope.selectedName2);
+
             document.getElementById('theDiv').style.visibility = 'visible';
-        }
-    };
 
-    var getCommon = function (object1, object2) {
-        var names = [], result = [];
-        for (var i = 0; i < object1.items.length; i++) {
-            names.push(object1.items[i].name);
-        }
-        for (var i = 0; i < object2.items.length; i++) {
-            if (names.includes(object2.items[i].name)) {
-                result.push(object2.items[i].name);
+            //API KEY: dJYKAs1XFW8oAJj1dqj9X7VWztbQ8tyy3SNUkegI
+
+            var req1 = {
+                method: 'POST',
+                url: 'https://mksjpypoh9.execute-api.us-east-1.amazonaws.com/TestStage',
+                headers: {
+                    'X-API-KEY':'dJYKAs1XFW8oAJj1dqj9X7VWztbQ8tyy3SNUkegI'
+                },
+                data: { "id1": id1, "id2": id2 }
             }
-        }
 
-        return result;
+            $http(req1)
+                .then(function (response) {
+                    var info = response.data;
+                    $scope.comics = getCommon(info[0], info[1]);
+                    if ($scope.comics.length == 0) {
+                        alert('No common comics found.');
+                    }
+                    document.getElementById('LoadComics').style.visibility = 'hidden';
+                    document.getElementById('Comics').style.visibility = 'visible';
+                })
+                .catch(function (data) {
+                    alert('An error has occurred. ' + data);
+                });
+
+            var req2 = {
+                method: 'POST',
+                url: 'https://5f8auylbwd.execute-api.us-east-1.amazonaws.com/TestStage',
+                headers: {
+                    'X-API-KEY':'dJYKAs1XFW8oAJj1dqj9X7VWztbQ8tyy3SNUkegI'
+                },
+                data: { "id1": id1, "id2": id2 }
+            }
+
+            $http(req2)
+                .then(function (response) {
+                    var info = response.data;
+                    $scope.series = getCommon(info[0], info[1]);
+                    if ($scope.series.length == 0) {
+                        alert('No common series found.');
+                    }
+                    document.getElementById('LoadSeries').style.visibility = 'hidden';
+                    document.getElementById('Series').style.visibility = 'visible';
+                })
+                .catch(function (data) {
+                    alert('An error has occurred. ' + data);
+                });
+
+            //comics: https://mksjpypoh9.execute-api.us-east-1.amazonaws.com/TestStage
+            //series: https://5f8auylbwd.execute-api.us-east-1.amazonaws.com/TestStage
+
+
+        }
     };
+
+      var getCommon = function (object1, object2) {
+          var names = [], result = [];
+          for (var i = 0; i < object1.length; i++) {
+              names.push(object1[i]);
+          }
+          for (var i = 0; i < object2.length; i++) {
+              if (names.includes(object2[i])) {
+                  result.push(object2[i]);
+              }
+          }
+
+          return result;
+      };
 
   });

@@ -1,17 +1,18 @@
 <div class="jumbotron">
-    <h1>Assignment #4</h1>
+    <h1>Assignment #4 - #5</h1>
 </div>
 
 <p><a href="https://github.com/migmarti/Cloud-Computing/blob/master/app/scripts/controllers/a4.js" target="_blank">Github Link</a></p>
 
 <div>
-    Character 1:
-    <select ng-model="selectedName" ng-options="x for x in names | orderBy">
-    </select>
-    <br>
-    Character 2:
-    <select ng-model="selectedName2" ng-options="x for x in names| orderBy">
-    </select>
+    <div>
+        <p>Character 1:
+        <select ng-model="selectedName" ng-options="x for x in names | orderBy">
+        </select></p>
+        <p>Character 2:
+        <select ng-model="selectedName2" ng-options="x for x in names| orderBy">
+        </select></p>
+    </div>
     <br>
     <div style="text-align:center;">
         <button ng-click="execute()">Execute</button>
@@ -23,16 +24,31 @@
     <div style="text-align:center;">
         <p><b>{{selectedName}} and {{selectedName2}}</b></p>
     </div>
-    <div>
-        <p><b>Common Comics</b></p>
-        <div ng-repeat="comic in comics track by $index">{{comic}}</div>
-    </div>
     <br>
-    <div>
-        <p><b>Common Series</b></p>
-        <div ng-repeat="s in series track by $index">{{s}}</div>
+    <div class="row">
+        <div class="column" style="text-align:center;">
+            <p id="LoadComics"> Loading Common Comics... </p>
+            <div style="visibility:hidden;" id="Comics">
+                <p><b>Common Comics</b></p>
+                <div ng-repeat="comic in comics track by $index">{{comic}}</div>
+            </div>
+        </div>
+        <div class="column" style="text-align:center;">
+            <p id="LoadSeries"> Loading Common Series... </p>
+            <div style="visibility:hidden;" id="Series">
+                <p><b>Common Series</b></p>
+                <div ng-repeat="s in series track by $index">{{s}}</div>
+            </div>
+        </div>
     </div>
 </div>
+<br>
+
+<p><b>List the 3 main things you need to do in order achieve your professional goals:</b></p>
+<p>- Aceptar errores y aprender de ellos para no repetirlos.</p>
+<p>- No dejar que los fracasos impidan el progreso.</p>
+<p>- Tomar iniciativa; no caer en inactividad.</p>
+
 
 <div style="text-align:center">
     <a ng-href="/#!/assignments"><button>Back</button></a>
