@@ -43,6 +43,8 @@ angular.module('migsApp')
     }
     //$scope.names = ['mike', 'shorpo', 'puskintio'];
     $scope.execute = function () {
+        $scope.comicString ='Loading Common Comics...';
+        $scope.seriesString ='Loading Common Series...';
         $scope.comics = [];
         $scope.series = [];
         if ($scope.selectedName != null && $scope.selectedName2 != null) {
@@ -69,8 +71,7 @@ angular.module('migsApp')
                     if ($scope.comics.length == 0) {
                         alert('No common comics found.');
                     }
-                    document.getElementById('LoadComics').style.visibility = 'hidden';
-                    document.getElementById('Comics').style.visibility = 'visible';
+                    $scope.comicString = 'Common Comics';
                 })
                 .catch(function (data) {
                     alert('An error has occurred. ' + data);
@@ -92,8 +93,7 @@ angular.module('migsApp')
                     if ($scope.series.length == 0) {
                         alert('No common series found.');
                     }
-                    document.getElementById('LoadSeries').style.visibility = 'hidden';
-                    document.getElementById('Series').style.visibility = 'visible';
+                    $scope.seriesString = 'Common Series';
                 })
                 .catch(function (data) {
                     alert('An error has occurred. ' + data);
@@ -107,17 +107,13 @@ angular.module('migsApp')
     };
 
       var getCommon = function (object1, object2) {
-          var names = [], result = [];
-          for (var i = 0; i < object1.length; i++) {
-              names.push(object1[i]);
-          }
+          var results = [];
           for (var i = 0; i < object2.length; i++) {
-              if (names.includes(object2[i])) {
-                  result.push(object2[i]);
+              if (object1.includes(object2[i])) {
+                  results.push(object2[i]);
               }
           }
-
-          return result;
+          return results;
       };
 
   });

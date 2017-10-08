@@ -27,18 +27,12 @@
     <br>
     <div class="row">
         <div class="column" style="text-align:center;">
-            <p id="LoadComics"> Loading Common Comics... </p>
-            <div style="visibility:hidden;" id="Comics">
-                <p><b>Common Comics</b></p>
-                <div ng-repeat="comic in comics track by $index">{{comic}}</div>
-            </div>
+            <p><b>{{comicString}}</b></p>
+            <div ng-repeat="comic in comics track by $index">{{comic}}</div>
         </div>
         <div class="column" style="text-align:center;">
-            <p id="LoadSeries"> Loading Common Series... </p>
-            <div style="visibility:hidden;" id="Series">
-                <p><b>Common Series</b></p>
-                <div ng-repeat="s in series track by $index">{{s}}</div>
-            </div>
+            <p><b>{{seriesString}}</b></p>
+            <div ng-repeat="s in series track by $index">{{s}}</div>
         </div>
     </div>
 </div>
