@@ -49,6 +49,9 @@ angular
         controller: 'A4Ctrl',
         controllerAs: 'a4'
       })
+      .when('/a6', {
+        templateUrl: 'views/a6.html'
+      })
       .otherwise({
         redirectTo: '/'
       });

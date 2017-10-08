@@ -1,0 +1,39 @@
+<div class="jumbotron">
+    <h1>Assignment #6</h1>
+</div>
+
+<p><b>1. Read the AWS Well Architected Framework and make a summary about the 5 pillars.
+    <a href="https://d0.awsstatic.com/whitepapers/architecture/AWS_Well-Architected_Framework.pdf" target="_blank"> Link </a>
+</b></p>
+
+<p>El AWS Well-Architected Framework permite a los usuarios verificar y mejorar sus arquitecturas basadas en la nube y comprender más a fondo el impacto de sus decisiones de diseño. Los sistemas diseñados con una arquitectura íntegra pueden llegar a aumentar en gran medida la probabilidad de éxito, por lo tanto es indispensable conocer lo que constituye un marco de trabajo efectivo. Se abordan los principios generales de diseño, así como las mejores prácticas específicas y la orientación en cinco áreas conceptuales definidas como pilares: seguridad, fiabilidad, eficiencia de rendimiento, optimización de costes y excelencia operacional.</p>
+
+<p>El pilar de la seguridad aborda la capacidad de proteger la información, los sistemas y los bienes relacionados mientras se genera valor empresarial a través de evaluaciones de riesgo y estrategias de mitigación. Para fortalecer la seguridad de un sistema existe una serie de principios que pueden ser implementadas. Uno de estos principios consiste en aplicar firewalls y controles de seguridad en todos los recursos en cada capa. Otra medida recomendable es asegurar que la autorización sea apropiada para cada interacción con los recursos de Amazon Web Services e implementar fuertes controles de acceso lógico directamente en los recursos. Finalmente, se recomienda utilizar AWS Shared Responsibility Model para centrar la seguridad de la aplicación, los datos y sistemas operativos mientras AWS proporciona infraestructura y servicios seguros.</p>
+
+<p>El pilar de fiabilidad incluye la capacidad de un sistema para recuperarse de interrupciones de infraestructura o servicio, adquirir dinámicamente recursos de cómputo para satisfacer la demanda y mitigar interrupciones como configuraciones erróneas o problemas de red transitorios. En la nube, es recomendable probar cómo falla el sistema y poder validar los procedimientos de recuperación. Además, al supervisar un sistema para indicadores clave de rendimiento (KPI), se puede activar la automatización cuando se rebasa un límite establecido. Esto da paso a la notificación automática y el seguimiento de los fallos, así como los procesos de recuperación automatizados que funcionan o reparan el fallo.</p>
+
+<p>Otra manera para incrementar la fiabilidad de un sistema es implementar la escala horizontal para aumentar la disponibilidad del sistema agregado; esto es reemplazar un recurso grande con múltiples recursos pequeños para reducir el impacto de un solo fallo en el sistema general. La capacidad de un sistema es también un factor considerable que puede ser manejada de manera fiable al supervisar la demanda y la utilización del sistema, y automatizar la adición o remoción de recursos para mantener el nivel óptimo satisfactorio.</p>
+
+<p>El pilar de eficiencia de rendimiento se centra en el uso competente de los recursos para cumplir requisitos requisitos y mantener esa eficiencia conforme fluctúa la demanda y la evolución de tecnologías. Para promover la eficiencia, se puede utilizar arquitecturas sin servidor, ya que en la nube eliminan la necesidad de ejecutar y mantener servidores para llevar a cabo actividades. En adición, disponer de recursos virtuales y automatizables permite realizar rápidamente pruebas comparativas utilizando diferentes tipos de instancias, almacenamiento o configuraciones, lo cual promueve la experimentación benefica para el rendimiento. Un punto importante menciona que un sistema con buen rendimiento dispone de un enfoque de tecnología que se alinea mejor con lo que está tratando de lograr, ejerciendo el concepto de la ‘simpatía mecánica’.</p>
+
+<p>El pilar enfocado en la optimización de costes incluye el proceso continuo de refinamiento y mejora de un sistema a lo largo de su vida. Desde el diseño inicial en la primera prueba de concepto hasta el funcionamiento continuo de las cargas de trabajo de producción, la optimización permitirá construir y operar sistemas de costos que logren resultados y minimicen costos, permitiendo así a negocios maximizar su retorno de inversión. Una manera importante de implementar esta optimización es adoptar un modelo de consumo en donde sólo se paga por los recursos informáticos que se consumen y aumentar o disminuir el uso dependiendo de los requisitos del negocio, no mediante el uso de pronósticos elaborados. Además, es recomendable utilizar servicios gestionados para reducir el coste de propiedad. En la nube, los servicios gestionados eliminan la carga operativa de mantener servidores y pueden ofrecer un menor coste por transacción o servicio.</p>
+
+<p>El pilar de excelencia operacional incluye prácticas y procedimientos usados ​​para manejar cargas de trabajo de producción. Esto incluye cómo se ejecutan los cambios planificados, así como las respuestas a eventos inesperados. La ejecución de cambios y las respuestas deberían ser automatizadas. Todos los procesos y procedimientos de excelencia operacional deben documentarse, probarse y revisarse periódicamente. Los procesos se deberían alinear con los objetivos empresariales para así reducir el ruido en métricas y apoyar las necesidades críticas de la empresa.</p>
+
+<p>Otras recomendaciones para lograr la excelencia operacional es poner los procesos para que todos los tipos de eventos y fallos operacionales sean capturados, revisados ​​y luego utilizados para mejoras. Las revisiones regulares de las operaciones deberían dar lugar a mejoras en los procesos que impulsen la excelencia operacional. Por último, se deberían mantener actualizados estos procedimientos; las guías de procesos y procedimientos deben adaptarse a medida que evolucionan los entornos y las operaciones.</p>
+
+
+<p><b>2. Explain how you will apply the AWS Well Architecture Framework to your project.</b></p>
+
+<p>El hecho implementar AWS Well Architecture Framework a nuestro proyecto nos ayudará a producir un sistema estable y eficiente, lo que nos permite centrarnos en los requisitos funcionales. En cuestión de seguridad, gestionaremos identidades y accesos mediante IAM como partes clave, garantizando que sólo los usuarios autorizados y autenticados puedan acceder a los recursos y sólo de la manera que se pretende. En adición, Amazon S3 cuenta con capacidades de encriptación.</p>
+
+<p>Durante el desarrollo del proyecto, se espera que ocurran fallas, y necesitamos saber cómo tomar conciencia de estos fracasos, responder a ellos y evitar que vuelvan a ocurrir. Por ende, planeamos realizar regularmente una copia de seguridad de los datos y probar los archivos de copia de seguridad para asegurarnos de que puede recuperarse de los errores físicos y lógicos. Para incrementar la fiabilidad y excelencia operacional, utilizaremos plantillas AWS CloudFormation para la creación de recursos AWS y su proporción de manera ordenada y predecible.</p>
+
+<p>Nuestra arquitectura está basada principalmente en cómputo a través de funciones AWS Lambda, lo cual nos permite ejecutar codigo sin iniciar una instancia y así mantener al tanto con demandas. Para el monitoreo de rendimiento y costo, utilizaremos CloudWatch para obtener métricas y notificaciones.</p>
+
+
+
+
+<div style="text-align:center">
+    <a ng-href="/#!/assignments"><button>Back</button></a>
+</div>
