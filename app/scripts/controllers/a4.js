@@ -64,14 +64,18 @@ angular.module('migsApp')
                 data: { "id1": id1, "id2": id2 }
             }
 
+            var startComics = new Date();
             $http(reqComics)
                 .then(function (response) {
                     var info = response.data;
+                    var endComics = new Date();
+                    var seconds = (endComics.getTime() - startComics.getTime()) / 1000;
                     $scope.comics = getCommon(info[0], info[1]);
                     if ($scope.comics.length == 0) {
                         alert('No common comics found.');
                     }
-                    $scope.comicString = 'Common Comics';
+                    console.log(seconds);
+                    $scope.comicString = 'Common Comics (' + seconds + ' seconds)';
                 })
                 .catch(function (data) {
                     alert('An error has occurred. ' + data);
@@ -86,22 +90,21 @@ angular.module('migsApp')
                 data: { "id1": id1, "id2": id2 }
             }
 
+            var startSeries = new Date();
             $http(reqSeries)
                 .then(function (response) {
                     var info = response.data;
+                    var endSeries = new Date();
+                    var seconds = (endSeries.getTime() - startSeries.getTime()) / 1000;
                     $scope.series = getCommon(info[0], info[1]);
                     if ($scope.series.length == 0) {
                         alert('No common series found.');
                     }
-                    $scope.seriesString = 'Common Series';
+                    $scope.seriesString = 'Common Series (' + seconds + ' seconds)';
                 })
                 .catch(function (data) {
                     alert('An error has occurred. ' + data);
                 });
-
-            //comics: https://mksjpypoh9.execute-api.us-east-1.amazonaws.com/TestStage
-            //series: https://5f8auylbwd.execute-api.us-east-1.amazonaws.com/TestStage
-
 
         }
     };
