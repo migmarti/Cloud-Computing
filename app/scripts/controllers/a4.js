@@ -56,7 +56,7 @@ angular.module('migsApp')
             //API KEY: dJYKAs1XFW8oAJj1dqj9X7VWztbQ8tyy3SNUkegI
 
             var reqComics = {
-                method: 'POST',
+                method: 'PUT',
                 url: 'https://mksjpypoh9.execute-api.us-east-1.amazonaws.com/TestStage/comics',
                 headers: {
                     'X-API-KEY':'dJYKAs1XFW8oAJj1dqj9X7VWztbQ8tyy3SNUkegI'
@@ -78,7 +78,7 @@ angular.module('migsApp')
                 });
 
             var reqSeries = {
-                method: 'POST',
+                method: 'PUT',
                 url: 'https://mksjpypoh9.execute-api.us-east-1.amazonaws.com/TestStage/series',
                 headers: {
                     'X-API-KEY':'dJYKAs1XFW8oAJj1dqj9X7VWztbQ8tyy3SNUkegI'
