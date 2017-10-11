@@ -55,16 +55,16 @@ angular.module('migsApp')
 
             //API KEY: dJYKAs1XFW8oAJj1dqj9X7VWztbQ8tyy3SNUkegI
 
-            var req1 = {
+            var reqComics = {
                 method: 'POST',
-                url: 'https://mksjpypoh9.execute-api.us-east-1.amazonaws.com/TestStage',
+                url: 'https://mksjpypoh9.execute-api.us-east-1.amazonaws.com/TestStage/comics',
                 headers: {
                     'X-API-KEY':'dJYKAs1XFW8oAJj1dqj9X7VWztbQ8tyy3SNUkegI'
                 },
                 data: { "id1": id1, "id2": id2 }
             }
 
-            $http(req1)
+            $http(reqComics)
                 .then(function (response) {
                     var info = response.data;
                     $scope.comics = getCommon(info[0], info[1]);
@@ -77,16 +77,16 @@ angular.module('migsApp')
                     alert('An error has occurred. ' + data);
                 });
 
-            var req2 = {
+            var reqSeries = {
                 method: 'POST',
-                url: 'https://5f8auylbwd.execute-api.us-east-1.amazonaws.com/TestStage',
+                url: 'https://mksjpypoh9.execute-api.us-east-1.amazonaws.com/TestStage/series',
                 headers: {
                     'X-API-KEY':'dJYKAs1XFW8oAJj1dqj9X7VWztbQ8tyy3SNUkegI'
                 },
                 data: { "id1": id1, "id2": id2 }
             }
 
-            $http(req2)
+            $http(reqSeries)
                 .then(function (response) {
                     var info = response.data;
                     $scope.series = getCommon(info[0], info[1]);
@@ -107,13 +107,13 @@ angular.module('migsApp')
     };
 
       var getCommon = function (object1, object2) {
-          var results = [];
+          var set = new Set();
           for (var i = 0; i < object2.length; i++) {
               if (object1.includes(object2[i])) {
-                  results.push(object2[i]);
+                  set.add(object2[i]);
               }
           }
-          return results;
+          return Array.from(set);
       };
 
   });
