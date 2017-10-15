@@ -50,6 +50,8 @@ angular.module('migsApp')
         if ($scope.selectedName != null && $scope.selectedName2 != null) {
             var id1 = characters.get($scope.selectedName);
             var id2 = characters.get($scope.selectedName2);
+            console.log('id1: ' + id1);
+            //1011334
 
             document.getElementById('theDiv').style.visibility = 'visible';
 
