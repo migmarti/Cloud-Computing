@@ -130,6 +130,36 @@ functions:
 #         BucketName: mig-practica
 #         VersioningConfiguration:
 #           Status: Enabled
+resources:
+  Resources: 
+    NewResource:
+      Type: "AWS::DynamoDB::Table"
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: Id
+            AttributeType: S
+          # - AttributeName: StartTime
+          #   AttributeType: S
+          # - AttributeName: EndTime
+          #   AttributeType: S
+          # - AttributeName: SingleQuantity
+          #   AttributeType: N
+          # - AttributeName: Character1
+          #   AttributeType: S
+          # - AttributeName: Character2
+          #   AttributeType: S
+          # - AttributeName: MemoryReservedMB
+          #   AttributeType: N
+          # - AttributeName: MemoryUsedMB
+          #   AttributeType: N
+        KeySchema:
+          - AttributeName: Id
+            KeyType: HASH
+        TableName: mmartMarvelTable
+        ProvisionedThroughput:
+            ReadCapacityUnits: 5
+            WriteCapacityUnits: 2
+
 
 #  Outputs:
 #     NewOutput:
